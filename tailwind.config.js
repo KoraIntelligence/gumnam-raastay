@@ -2,6 +2,9 @@
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -11,11 +14,14 @@ module.exports = {
         ritualInk: '#2e2e2e',
         ashWhisper: '#eaeaea',
         burnishedGold: '#c29b46',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
       fontFamily: {
-        serif: ['"EB Garamond"', 'serif'],
-        ritual: ['"Marcellus"', 'serif'],
-        body: ['"Source Sans Pro"', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        ritual: ['Marcellus', 'serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
       },
     },
   },

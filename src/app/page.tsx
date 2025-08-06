@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   const [showLogo, setShowLogo] = useState(true);
@@ -14,6 +15,18 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0e0d0c] text-[#cb793a] font-body">
+      {/* Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 py-4 bg-[#0e0d0c]/70 backdrop-blur-sm text-xs font-mono uppercase tracking-widest">
+        <Link href="/">
+          <Image src="/logo.png" alt="Logo" width={32} height={32} />
+        </Link>
+        <nav className="space-x-6">
+          <Link href="#capsule" className="hover:text-white transition">Capsules</Link>
+          <Link href="/about" className="hover:text-white transition">Our Story</Link>
+          <Link href="/contact" className="hover:text-white transition">Contact</Link>
+        </nav>
+      </header>
+
       {/* Logo Summon */}
       <AnimatePresence>
         {showLogo && (
@@ -30,7 +43,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center min-h-[90vh] px-6 bg-[#0e0d0c]">
+      <section className="flex flex-col items-center justify-center text-center min-h-[90vh] px-6 pt-24 bg-[#0e0d0c]">
         <motion.h1
           className="text-4xl sm:text-6xl font-serif tracking-tight text-[#cb793a]"
           initial={{ opacity: 0, y: 20 }}
@@ -74,7 +87,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="bg-[#0e0d0c] text-white px-6 py-24 text-center">
+      <section className="bg-[#0e0d0c] text-[#cb793a] px-6 py-24 text-center">
         <h3 className="text-2xl font-serif mb-4">About the House</h3>
         <p className="max-w-3xl mx-auto text-lg">
           Gumnam Raastay is a house of hidden threads — slow garments woven from ritual, story, and firelight.
@@ -99,4 +112,3 @@ export default function Home() {
     </div>
   );
 }
-
