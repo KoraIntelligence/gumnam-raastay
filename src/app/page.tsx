@@ -77,7 +77,7 @@ export default function Home() {
             <h2 className="text-3xl font-serif mb-4">Raakh Say Raani</h2>
             <p className="text-md italic mb-6">She rose not from fire, but from its memory, like a work of art next to its explanation.</p>
             <a
-              href="/capsule/raakh-say-raani"
+              href="/capsules/raakh"
               className="inline-block border border-[#cb793a] rounded-full px-5 py-2 text-sm hover:bg-[#cb793a] hover:text-black transition"
             >
               Read the Scroll
