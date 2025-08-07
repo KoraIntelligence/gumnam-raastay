@@ -11,14 +11,17 @@ export default function Navbar() {
       <div className="flex gap-6 items-center text-sm uppercase tracking-wider">
         <div className="relative group">
           <button className="hover:text-burnishedGold">Capsules</button>
-          <div className="absolute left-0 mt-2 w-48 bg-twilight text-ashWhisper shadow-lg rounded hidden group-hover:block z-10">
+          <div
+            className="absolute left-0 mt-2 w-48 bg-twilight text-ashWhisper shadow-lg rounded opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 z-50"
+            onMouseEnter={(e) => e.stopPropagation()}
+            onMouseLeave={(e) => e.stopPropagation()}
+          >
             <Link
               href="/capsules/raakh"
               className="block px-4 py-2 hover:bg-burnishedGold hover:text-twilight"
             >
               Raakh Say Raani
             </Link>
-            {/* Add more capsule links here */}
           </div>
         </div>
         <Link href="/story" className="hover:text-burnishedGold">
