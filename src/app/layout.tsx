@@ -1,47 +1,82 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
-import Navbar from "../components/Navbar";
-import { GA_ID } from "../lib/gtag";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Gumnam Raastay — Wear the Forgotten Road",
   description:
     "Ritualwear capsules woven from story and craft. First drop: Raakh Say Raani. Pre-orders open soon.",
+  openGraph: {
+    title: "Gumnam Raastay — Wear the Forgotten Road",
+    description:
+      "Ritualwear capsules woven from story and craft. First drop: Raakh Say Raani. Pre-orders open soon.",
+    url: "https://gumnamraastay.com",
+    images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gumnam Raastay — Wear the Forgotten Road",
+    description:
+      "Ritualwear capsules woven from story and craft. First drop: Raakh Say Raani. Pre-orders open soon.",
+    images: ["/og/home.jpg"],
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-twilight text-burnishedGold`}>
-        {/* GA4 Bootstrap */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-            <Script id="ga-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);} 
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}');
-              `}
-            </Script>
-          </>
-        )}
+      <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CDLBZYY7KW"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CDLBZYY7KW');
+            `,
+          }}
+        />
 
-        <Navbar />
+        {/* Schema.org JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Gumnam Raastay",
+              url: "https://gumnamraastay.com",
+              sameAs: ["https://instagram.com/<handle>"],
+              founder: ["Taimur", "Kainat"],
+              description:
+                "Ritualwear capsules woven from story and craft. First drop: Raakh Say Raani.",
+            }),
+          }}
+        />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
-
-        {/* Powered-by strip (visible on all pages) */}
-        <div className="w-full border-t border-neutral-800 bg-twilight">
-          <div className="mx-auto max-w-6xl px-6 py-6 text-center text-xs text-neutral-400">
-            Built with <a className="underline hover:text-white" href="https://kora.pathsunknown.xyz" target="_blank" rel="noreferrer">Kora Companions</a> · Every conversation becomes a scroll.
-          </div>
-        </div>
       </body>
     </html>
   );

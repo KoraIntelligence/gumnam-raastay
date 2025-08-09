@@ -8,6 +8,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { gtag } from "../lib/gtag";
 import { getTallyHref } from "../lib/utm";
 
+// Extend the Window type so TS stops complaining
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 export const metadata = {
   title: "Gumnam Raastay — Wear the Forgotten Road",
   description:
@@ -29,16 +36,34 @@ export const metadata = {
 };
 
 export default function Home() {
-  // one-time logo summon
   const [showLogo, setShowLogo] = useState(true);
   useEffect(() => {
     const t = setTimeout(() => setShowLogo(false), 2500);
     return () => clearTimeout(t);
   }, []);
 
+  // Google Analytics init
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      function gtagFn(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      gtagFn("js", new Date());
+      gtagFn("config", "G-CDLBZYY7KW");
+    }
+  }, []);
+
+  const handleCTAClick = () => {
+    gtag("cta_click", { location: "home_hero", target: "/capsules/raakh" });
+  };
+
+  const handleWaitlistClick = () => {
+    gtag("waitlist_click", { location: "home_hero" });
+  };
+
   return (
     <main className="pt-24 pb-32 px-6 max-w-5xl mx-auto text-center">
-
       {/* JSON-LD Organization schema */}
       <Script
         id="org-jsonld"
@@ -74,7 +99,7 @@ export default function Home() {
               transition={{ duration: 1.0 }}
             >
               <Image
-                src="/logo.png"        // ensure this exists in /public
+                src="/logo.png"
                 alt="Gumnam Raastay logo"
                 width={180}
                 height={180}
@@ -105,9 +130,7 @@ export default function Home() {
         >
           <Link
             href="/capsules/raakh"
-            onClick={() =>
-              gtag("cta_click", { location: "home_hero", target: "/capsules/raakh" })
-            }
+            onClick={handleCTAClick}
             className="inline-block border border-burnishedGold rounded-full px-6 py-2 text-sm hover:bg-burnishedGold hover:text-twilight transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burnishedGold"
           >
             Enter the Capsule
@@ -115,7 +138,7 @@ export default function Home() {
 
           <a
             href={getTallyHref("https://tally.so/<your-form-id>")}
-            onClick={() => gtag("waitlist_click", { location: "home_hero" })}
+            onClick={handleWaitlistClick}
             className="text-sm underline underline-offset-4 text-neutral-300 hover:text-white"
             aria-label="Join the waitlist"
             target="_blank"
@@ -168,6 +191,20 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Powered by strip */}
+      <div className="bg-ritualInk text-center mt-20 py-4 text-sm text-neutral-400">
+        Built with{" "}
+        <a
+          href="https://koraintelligence.com"
+          target="_blank"
+          rel="noreferrer"
+          className="underline hover:text-burnishedGold"
+        >
+          Kora Companions
+        </a>{" "}
+        · Every conversation becomes a scroll.
+      </div>
     </main>
   );
 }
