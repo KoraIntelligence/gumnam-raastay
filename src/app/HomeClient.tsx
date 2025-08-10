@@ -8,12 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { gtag } from "../lib/gtag";
 import { getTallyHref } from "../lib/utm";
 
-// TS: declare dataLayer on window so VSCode stops complaining
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
 
 export default function HomeClient() {
   // one-time logo summon
