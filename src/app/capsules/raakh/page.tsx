@@ -2,21 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import { gtag } from "../../../lib/gtag";
 
-// Extend Window type to avoid TS errors
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
+
 
 export default function RaakhSayRaani() {
-  // Analytics init
-
   const handleWaitlistClick = () => {
-    gtag("waitlist_click", { location: "raakh_page" });
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      gtag("waitlist_click", { location: "raakh_page" });
+    }
   };
 
   return (
