@@ -154,19 +154,6 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* Powered by strip */}
-      <div className="bg-ritualInk text-center mt-20 py-4 text-sm text-neutral-400">
-        Built with{" "}
-        <a
-          href="https://koraintelligence.com"
-          target="_blank"
-          rel="noreferrer"
-          className="underline hover:text-burnishedGold"
-        >
-          Kora Companions
-        </a>{" "}
-        · Every conversation becomes a scroll.
-      </div>
     </main>
   );
 }
