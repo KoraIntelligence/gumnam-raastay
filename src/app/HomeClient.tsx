@@ -25,14 +25,7 @@ export default function HomeClient() {
 
   // Google Analytics init (safe if GA is already loaded in layout)
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      function gtagFn(...args: any[]) {
-        window.dataLayer.push(args);
-      }
-      gtagFn("js", new Date());
-      gtagFn("config", "G-CDLBZYY7KW");
-    }
+  
   }, []);
 
   return (

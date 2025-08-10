@@ -14,16 +14,6 @@ declare global {
 
 export default function RaakhSayRaani() {
   // Analytics init
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      function gtagFn(...args: any[]) {
-        window.dataLayer.push(args);
-      }
-      gtagFn("js", new Date());
-      gtagFn("config", "G-CDLBZYY7KW");
-    }
-  }, []);
 
   const handleWaitlistClick = () => {
     gtag("waitlist_click", { location: "raakh_page" });

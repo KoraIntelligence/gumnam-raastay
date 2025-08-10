@@ -1,17 +1,19 @@
-export const GA_TRACKING_ID = "G-CDLBZYY7KW"; // Replace with your GA ID
+export const GA_TRACKING_ID = "G-CDLBZYY7KW"; // your real ID
 
-// Send a pageview event to GA
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export const pageview = (url: string) => {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("config", GA_TRACKING_ID, {
-      page_path: url,
-    });
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("config", GA_TRACKING_ID, { page_path: url });
   }
 };
 
-// Send custom events to GA
-export const gtag = (action: string, params: { [key: string]: any }) => {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", action, params);
+export const gtag = (action: string, params: Record<string, unknown>) => {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", action, params);
   }
 };
